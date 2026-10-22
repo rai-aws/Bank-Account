@@ -1,7 +1,7 @@
 package bank_account;
 
 public class BankAccount {
-
+    
     private double balance;
     private boolean isFrozen;
 
@@ -12,33 +12,39 @@ public class BankAccount {
 
     public void deposit(double amount) {
 
-        if(isFrozen){
+        if (isFrozen) {
             System.out.println("Account Frozen");
-        }if(amount <= 0 ){
+            System.out.println("Unable to transact");
+            return;
+        }else if (amount <= 0) {
+            System.out.println("Amount deposited: " + amount);
             System.out.println("Invalid amount. Must be greater than 0");
-        }else{
-            balance += amount;
-            System.out.printf("Amount: ", balance);
+            return;
         }
-        
+        balance += amount;
+        System.out.printf("Amount deposited: %.2f%n", amount);
+        System.out.printf("Current balance: %.2f%n", balance);
     }
 
     public void withdraw(double amount) {
-
-        if(isFrozen){
+        if (isFrozen) {
             System.out.println("Account Frozen");
-        }if(amount <= 0){
-            System.out.println("Amount invalid");
-        } else if (amount > balance) {
+            System.out.println("Unable to transact");
+            return;
+        }else if (amount <= 0) {
+            System.out.println("Amount withdrawn: " + amount);
+            System.out.println("Invalid amount. Must be greater than 0");
+            return;
+        }else if (amount > balance) {
+            System.out.println("Amount withdrawn: " + amount);
             System.out.println("Insufficient balance");
-        }else{
-            balance -= amount;
-            System.out.printf("Withdrawn: ", amount );
+            System.out.printf("Current balance: %.2f%n", balance);
+            return;
         }
-        
+        balance -= amount;
+        System.out.printf("Amount withdrawn: %.2f%n", amount);
+        System.out.printf("Current balance: %.2f%n", balance);
     }
-
-    //get balance
 
     public double getBalance(){
         return balance;
@@ -46,18 +52,13 @@ public class BankAccount {
 
     public void freezeAccount() {
         isFrozen = true;
-        System.out.println("Account frozen");
     }
 
      public void unfreezeAccount() {
         isFrozen = false;
-        System.out.println("Account unfrozen");
     }
 
     public boolean isFrozen(){
         return isFrozen;
     }
-
-    
-
 }
