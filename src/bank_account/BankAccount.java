@@ -1,32 +1,43 @@
 
 package bank_account;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Represents a bank account that supports deposits, withdrawals,
- * balance checking, and account freezing.
+ * Represents a bank account and maintains its transaction history.
  */
 public class BankAccount {
-
     private double balance;
     private boolean isFrozen;
+    private String ownerName;
+    private List<Transaction> transactionHistory;
 
     /**
-     * Creates a new bank account with an initial balance of zero
-     * and an unfrozen status.
+     * Creates an account with an unknown owner.
      */
     public BankAccount() {
-        balance = 0.0;
-        isFrozen = false;
+        this("Unknown");
     }
 
     /**
-     * Deposits money into the account if the account is not frozen
-     * and the amount is greater than zero.
+     * Creates an account for the specified owner.
      *
-     * @param amount the amount of money to deposit
+     * @param ownerName the account owner's name
+     */
+    public BankAccount(String ownerName) {
+        this.ownerName = ownerName;
+        this.balance = 0.0;
+        this.isFrozen = false;
+        this.transactionHistory = new ArrayList<>();
+    }
+
+    /**
+     * Deposits a valid amount into the account.
+     *
+     * @param amount the amount to deposit
      */
     public void deposit(double amount) {
-
         if (isFrozen) {
             System.out.println("Account Frozen");
             System.out.println("Unable to transact");
@@ -35,23 +46,24 @@ public class BankAccount {
 
         if (amount <= 0) {
             System.out.println("Amount deposited: " + amount);
-            System.out.println("Invalid amount. Must be greater than 0");
+            System.out.println(
+                    "Invalid amount. Must be greater than 0");
             return;
         }
 
         balance += amount;
+        transactionHistory.add(new Transaction("Deposit", amount));
+
         System.out.printf("Amount deposited: %.2f%n", amount);
         displayBalance();
     }
 
     /**
-     * Withdraws money from the account if the account is not frozen,
-     * the amount is greater than zero, and sufficient funds are available.
+     * Withdraws a valid amount if sufficient funds are available.
      *
-     * @param amount the amount of money to withdraw
+     * @param amount the amount to withdraw
      */
     public void withdraw(double amount) {
-
         if (isFrozen) {
             System.out.println("Account Frozen");
             System.out.println("Unable to transact");
@@ -60,7 +72,8 @@ public class BankAccount {
 
         if (amount <= 0) {
             System.out.println("Amount withdrawn: " + amount);
-            System.out.println("Invalid amount. Must be greater than 0");
+            System.out.println(
+                    "Invalid amount. Must be greater than 0");
             return;
         }
 
@@ -72,6 +85,8 @@ public class BankAccount {
         }
 
         balance -= amount;
+        transactionHistory.add(new Transaction("Withdraw", amount));
+
         System.out.printf("Amount withdrawn: %.2f%n", amount);
         displayBalance();
     }
@@ -79,28 +94,46 @@ public class BankAccount {
     /**
      * Returns the current account balance.
      *
-     * @return the current balance
+     * @return the account balance
      */
     public double getBalance() {
         return balance;
     }
 
     /**
-     * Freezes the account to prevent deposits and withdrawals.
+     * Returns the account owner's name.
+     *
+     * @return the owner's name
+     */
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    /**
+     * Returns the list of account transactions.
+     *
+     * @return the transaction history
+     */
+    public List<Transaction> getTransactionHistory() {
+        return transactionHistory;
+    }
+
+    /**
+     * Freezes the account.
      */
     public void freezeAccount() {
         isFrozen = true;
     }
 
     /**
-     * Unfreezes the account to allow transactions again.
+     * Unfreezes the account.
      */
     public void unfreezeAccount() {
         isFrozen = false;
     }
 
     /**
-     * Displays the current account balance formatted to two decimal places.
+     * Displays the current account balance.
      */
     public void displayBalance() {
         System.out.printf("Current balance: %.2f%n", balance);
