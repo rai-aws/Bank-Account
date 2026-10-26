@@ -15,6 +15,7 @@ public class App {
      */
     public static void main(String[] args) {
 
+        System.out.println("Exercise 1 Test Cases");
         System.out.println("\nTest Case 1");
         BankAccount acc1 = new SavingsAccount("Test0");
         System.out.println("Account Owner: " + ((SavingsAccount) acc1).getOwnerName()+".") ;
@@ -41,28 +42,29 @@ public class App {
         acc1.freezeAccount();
         acc1.deposit(11500);
         
-        System.out.println("\nTest Case 9: Withdraw when account is frozen");
+        System.out.println("\nTest Case 9");
         acc1.withdraw(500);
 
-        System.out.println("\nTest Case 10: Unfreeze account");
+        System.out.println("\nTest Case 10");
         acc1.unfreezeAccount();
         acc1.withdraw(100);
 
-        System.out.println("\nTest Case 1: Transaction history");
+        System.out.println("\nExercise 2 Test Cases");
+        System.out.println("Test Case 1");
         System.out.println(
                 "Transaction history: "
                         + acc1.getTransactionHistory());
 
-        System.out.println("\nTest Case 2: Create account manager");
+        System.out.println("\nTest Case 2");
         BankAccountManager accM1 = new BankAccountManager();
 
-        System.out.println("\nTest Case 3: Add acc1");
+        System.out.println("\nTest Case 3");
         accM1.addAccount(acc1);
 
-        System.out.println("\nTest Case 4: Add a new account");
+        System.out.println("\nTest Case 4");
         accM1.addAccount(new SavingsAccount("Test1"));
 
-        System.out.println("\nTest Case 5: List all accounts");
+        System.out.println("\nTest Case 5");
         accM1.listAccounts();
         
     }
