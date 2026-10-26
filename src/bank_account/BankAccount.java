@@ -1,6 +1,7 @@
 
 package bank_account;
 
+import exception.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,18 +31,16 @@ public class BankAccount {
      *
      * @param amount the amount to deposit
      */
-    public void deposit(double amount) {
+    public void deposit(double amount) throws InvalidAmountException, AccountFrozenException{
         if (isFrozen) {
-            System.out.println("Account Frozen");
-            System.out.println("Unable to transact");
-            return;
+            throw new AccountFrozenException();
+            // return;
         }
 
         if (amount <= 0) {
-            System.out.println("Amount deposited: " + amount);
-            System.out.println(
-                    "Invalid amount. Must be greater than 0");
-            return;
+            System.out.printf("Amount deposited: %.2f%n", amount);
+            throw new InvalidAmountException();
+            // return;
         }
 
         balance += amount;
@@ -56,25 +55,30 @@ public class BankAccount {
      *
      * @param amount the amount to withdraw
      */
-    public void withdraw(double amount) {
+
+//     Amount withdrawn: 1500.00
+// Insufficient balance. 
+// Current balance: 500.13 
+
+
+    public void withdraw(double amount) 
+            throws InsufficientFundsException,
+                InvalidAmountException,
+                AccountFrozenException {
+
         if (isFrozen) {
-            System.out.println("Account Frozen");
-            System.out.println("Unable to transact");
-            return;
+            throw new AccountFrozenException();
         }
 
         if (amount <= 0) {
-            System.out.println("Amount withdrawn: " + amount);
-            System.out.println(
-                    "Invalid amount. Must be greater than 0");
-            return;
+            System.out.printf("Amount withdrawn: %.2f%n", amount);
+            throw new InvalidAmountException();
+
         }
 
         if (amount > balance) {
-            System.out.println("Amount withdrawn: " + amount);
-            System.out.println("Insufficient balance");
-            displayBalance();
-            return;
+            System.out.printf("Amount withdrawn: %.2f%n", amount);
+            throw new InsufficientFundsException();
         }
 
         balance -= amount;
