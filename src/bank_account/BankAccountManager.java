@@ -24,9 +24,8 @@ public class BankAccountManager implements Bank {
      *
      * @param account the account to add
      */
-    @Override
     public void addAccount(BankAccount account) {
-        if (accounts.size() >= 100) {
+        if (accounts.size() > 100) {
             System.out.println("Maximum account limit reached");
             return;
         }
@@ -43,7 +42,6 @@ public class BankAccountManager implements Bank {
      * @param id the account ID
      * @return the account, or null if it does not exist
      */
-    @Override
     public BankAccount getAccount(int id) {
         return accounts.get(id);
     }
@@ -55,18 +53,18 @@ public class BankAccountManager implements Bank {
         for (Map.Entry<Integer, BankAccount> entry : accounts.entrySet()) {
             BankAccount account = entry.getValue();
             double balance = account.getBalance();
-            String formattedBalance;
+            String formatBalance;
 
             if (balance == 0.0) {
-                formattedBalance = "0.0";
+                formatBalance = "0.0";
             } else {
-                formattedBalance = String.format("%.2f", balance);
+                formatBalance = String.format("%.2f", balance);
             }
 
             System.out.println(
                     "Account ID: " + entry.getKey()
                             + ", Account Name: " + account.getOwnerName()
-                            + ", Balance: " + formattedBalance);
+                            + ", Balance: " + formatBalance);
         }
     }
 }

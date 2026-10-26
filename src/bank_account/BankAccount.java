@@ -5,20 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Represents a bank account and maintains its transaction history.
+ *  and maintains its transaction history.
  */
 public class BankAccount {
     private double balance;
     private boolean isFrozen;
     private String ownerName;
     private List<Transaction> transactionHistory;
-
-    /**
-     * Creates an account with an unknown owner.
-     */
-    public BankAccount() {
-        this("Unknown");
-    }
 
     /**
      * Creates an account for the specified owner.

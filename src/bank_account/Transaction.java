@@ -29,7 +29,6 @@ public class Transaction {
      *
      * @return the transaction details
      */
-    @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 

@@ -14,32 +14,37 @@ public class App {
      * @param args command-line arguments
      */
     public static void main(String[] args) {
-        BankAccount acc1 = new SavingsAccount("Test0");
 
-        System.out.println("Test Case 1: Deposit");
+        System.out.println("\nTest Case 1");
+        BankAccount acc1 = new SavingsAccount("Test0");
+        System.out.println("Account Owner: " + ((SavingsAccount) acc1).getOwnerName()+".") ;
+
+        System.out.println("\nTest Case 2");
         acc1.deposit(1000.125);
 
-        System.out.println("\nTest Case 2: Deposit zero");
+        System.out.println("\nTest Case 3");
         acc1.deposit(0);
 
-        System.out.println("\nTest Case 3: Deposit negative amount");
+        System.out.println("\nTest Case 4");
         acc1.deposit(-500);
 
-        System.out.println("\nTest Case 4: Withdraw");
+        System.out.println("\nTest Case 5");
         acc1.withdraw(500);
 
-        System.out.println("\nTest Case 5: Withdraw more than balance");
+        System.out.println("\nTest Case 6");
         acc1.withdraw(1500);
 
-        System.out.println("\nTest Case 6: Withdraw negative amount");
+        System.out.println("\nTest Case 7");
         acc1.withdraw(-100);
 
-        System.out.println("\nTest Case 7: Frozen account");
+        System.out.println("\nTest Case 8");
         acc1.freezeAccount();
         acc1.deposit(11500);
+        
+        System.out.println("\nTest Case 9: Withdraw when account is frozen");
         acc1.withdraw(500);
 
-        System.out.println("\nTest Case 8: Unfreeze account");
+        System.out.println("\nTest Case 10: Unfreeze account");
         acc1.unfreezeAccount();
         acc1.withdraw(100);
 
@@ -59,5 +64,6 @@ public class App {
 
         System.out.println("\nTest Case 5: List all accounts");
         accM1.listAccounts();
+        
     }
 }
