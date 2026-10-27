@@ -7,7 +7,6 @@ public class InsufficientFundsException extends Exception {
         this.message = "Insufficient balance";
     }
 
-    @Override
     public String getMessage() {
         return message;
     }

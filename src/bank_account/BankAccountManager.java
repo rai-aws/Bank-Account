@@ -1,7 +1,9 @@
 
 package bank_account;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -66,5 +68,43 @@ public class BankAccountManager implements Bank {
                             + ", Account Name: " + account.getOwnerName()
                             + ", Balance: " + formatBalance);
         }
+    }
+
+    /**
+     * Filters transactions at or above a specified amount.
+     *
+     * @param amount the minimum transaction amount
+     * @param transactions the list of transactions
+     * @return the transactions matching the minimum amount
+     */
+    public List<Transaction> filterTransactionsAtOrAbove(
+            double amount, List<Transaction> transactions) {
+        List<Transaction> filteredTransactions = new ArrayList<>();
+
+        transactions.stream()
+                .filter(transaction -> transaction.getAmount() >= amount)
+                .forEach(transaction -> filteredTransactions.add(transaction));
+
+        return filteredTransactions;
+    }
+
+    /**
+     * Sorts transactions by amount in ascending order.
+     *
+     * @param transactions the list of transactions
+     * @return the sorted transactions
+     */
+    public List<Transaction> sortTransactionsByAmount(
+            List<Transaction> transactions) {
+        List<Transaction> sortedTransactions =
+                new ArrayList<>(transactions);
+
+        sortedTransactions.sort(
+                (transaction1, transaction2) ->
+                        Double.compare(
+                                transaction1.getAmount(),
+                                transaction2.getAmount()));
+
+        return sortedTransactions;
     }
 }

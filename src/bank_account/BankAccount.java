@@ -1,7 +1,9 @@
 
 package bank_account;
 
-import exception.*;
+import exception.AccountFrozenException;
+import exception.InsufficientFundsException;
+import exception.InvalidAmountException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,12 +57,6 @@ public class BankAccount {
      *
      * @param amount the amount to withdraw
      */
-
-//     Amount withdrawn: 1500.00
-// Insufficient balance. 
-// Current balance: 500.13 
-
-
     public void withdraw(double amount) 
             throws InsufficientFundsException,
                 InvalidAmountException,

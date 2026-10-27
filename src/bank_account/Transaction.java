@@ -25,6 +25,13 @@ public class Transaction {
     }
 
     /**
+     * @return the transaction amount
+     */
+    public double getAmount() {
+        return amount;
+    }
+
+    /**
      * Returns the transaction details with a formatted timestamp.
      *
      * @return the transaction details
@@ -32,9 +39,9 @@ public class Transaction {
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-        return "Transaction [type=" + type
+      return "Transaction [type=" + type
                 + ", amount=" + amount
                 + ", time_stamp=" + time_stamp.format(formatter)
-                + "]";
+                + "]";  
     }
 }
