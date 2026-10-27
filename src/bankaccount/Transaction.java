@@ -1,5 +1,5 @@
 
-package bank_account;
+package bankaccount;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -25,6 +25,8 @@ public class Transaction {
     }
 
     /**
+     * Returns the transaction amount.
+     *
      * @return the transaction amount
      */
     public double getAmount() {
@@ -36,12 +38,15 @@ public class Transaction {
      *
      * @return the transaction details
      */
+    @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter =
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-      return "Transaction [type=" + type
-                + ", amount=" + amount
-                + ", time_stamp=" + time_stamp.format(formatter)
-                + "]";  
+        return "Transaction"
+                + "\n  Type: " + type
+                + "\n  Amount: " + String.format("%.2f", amount)
+                + "\n  Timestamp: " + time_stamp.format(formatter)
+                + "\n";
     }
 }

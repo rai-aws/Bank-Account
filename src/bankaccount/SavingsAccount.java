@@ -1,5 +1,5 @@
 
-package bank_account;
+package bankaccount;
 
 /**
  * Represents a savings account.

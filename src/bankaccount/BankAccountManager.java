@@ -1,5 +1,4 @@
-
-package bank_account;
+package bankaccount;
 
 import java.util.ArrayList;
 import java.util.HashMap;

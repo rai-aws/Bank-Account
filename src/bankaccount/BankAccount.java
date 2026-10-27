@@ -1,5 +1,4 @@
-
-package bank_account;
+package bankaccount;
 
 import exception.AccountFrozenException;
 import exception.InsufficientFundsException;
@@ -33,23 +32,26 @@ public class BankAccount {
      *
      * @param amount the amount to deposit
      */
-    public void deposit(double amount) throws InvalidAmountException, AccountFrozenException{
-        if (isFrozen) {
-            throw new AccountFrozenException();
-            // return;
-        }
+    public void deposit(double amount) {
+        try {
+            if (isFrozen) {
+                throw new AccountFrozenException();
+            }
 
-        if (amount <= 0) {
+            if (amount <= 0) {
+                System.out.printf("Amount deposited: %.2f%n", amount);
+                throw new InvalidAmountException();
+            }
+
+            balance += amount;
+            transactionHistory.add(new Transaction("Deposit", amount));
+
             System.out.printf("Amount deposited: %.2f%n", amount);
-            throw new InvalidAmountException();
-            // return;
+            displayBalance();
+
+        } catch (InvalidAmountException | AccountFrozenException e) {
+            System.out.println(e.getMessage());
         }
-
-        balance += amount;
-        transactionHistory.add(new Transaction("Deposit", amount));
-
-        System.out.printf("Amount deposited: %.2f%n", amount);
-        displayBalance();
     }
 
     /**
@@ -57,31 +59,33 @@ public class BankAccount {
      *
      * @param amount the amount to withdraw
      */
-    public void withdraw(double amount) 
-            throws InsufficientFundsException,
-                InvalidAmountException,
-                AccountFrozenException {
+    public void withdraw(double amount) {
+        try {
+            if (isFrozen) {
+                throw new AccountFrozenException();
+            }
 
-        if (isFrozen) {
-            throw new AccountFrozenException();
-        }
+            if (amount <= 0) {
+                System.out.printf("Amount withdrawn: %.2f%n", amount);
+                throw new InvalidAmountException();
+            }
 
-        if (amount <= 0) {
+            if (amount > balance) {
+                System.out.printf("Amount withdrawn: %.2f%n", amount);
+                throw new InsufficientFundsException();
+            }
+
+            balance -= amount;
+            transactionHistory.add(new Transaction("Withdraw", amount));
+
             System.out.printf("Amount withdrawn: %.2f%n", amount);
-            throw new InvalidAmountException();
+            displayBalance();
 
+        } catch (InsufficientFundsException
+                | InvalidAmountException
+                | AccountFrozenException e) {
+            System.out.println(e.getMessage());
         }
-
-        if (amount > balance) {
-            System.out.printf("Amount withdrawn: %.2f%n", amount);
-            throw new InsufficientFundsException();
-        }
-
-        balance -= amount;
-        transactionHistory.add(new Transaction("Withdraw", amount));
-
-        System.out.printf("Amount withdrawn: %.2f%n", amount);
-        displayBalance();
     }
 
     /**

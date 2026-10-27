@@ -1,5 +1,5 @@
 
-package bank_account;
+package bankaccount;
 
 /**
  * Defines the operations for managing bank accounts.
